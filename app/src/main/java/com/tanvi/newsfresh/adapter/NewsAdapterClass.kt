@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.tanvi.newsfresh.databinding.ItemNewsBinding
+import com.tanvi.newsfresh.model.News
 
 class NewsAdapterClass(private val listener: NewsItemClicked) :
     RecyclerView.Adapter<NewsViewHolder>() {
@@ -18,7 +19,7 @@ class NewsAdapterClass(private val listener: NewsItemClicked) :
 
     override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
         val currentItem = items[position]
-        holder.titleView.text = currentItem.title
+        //holder.titleView.text = currentItem.title
     }
     override fun getItemCount(): Int {
         return items.size

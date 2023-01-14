@@ -3,7 +3,7 @@ package com.tanvi.newsfresh
 import android.content.Context
 
 
-class MySingleton constructor(context: Context) {
+ class MySingleton constructor(context: Context) {
         companion object {
             @Volatile
             private var INSTANCE: MySingleton? = null

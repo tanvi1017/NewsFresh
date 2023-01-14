@@ -16,13 +16,12 @@ private const val NUM_TABS = 5
 
         override fun createFragment(position: Int): Fragment {
             when (position) { //-1
-                0 -> return ScienceFragment()
-                1 -> return HealthCareFragment()
-                2-> return SportFragment()
-                3-> return TechnologyFragment()
+                0 -> return   TechnologyFragment()
+                2 -> return ScienceFragment()
+                3-> return SportFragment()
+                1-> return HealthCareFragment()
                 4->return EntertainmentFragment()
             }
             return ScienceFragment()
         }
-
     }

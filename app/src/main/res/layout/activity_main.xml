@@ -9,8 +9,9 @@
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:id="@+id/toolbar"
-        android:background="@color/purple_200"
+        android:background="#FA6B3E"
         app:titleTextColor="@color/black"
+        android:layout_gravity="center_horizontal"
         app:title="Daily News"
         android:layout_height="?attr/actionBarSize"/>
     <com.google.android.material.tabs.TabLayout
@@ -21,7 +22,7 @@
         app:tabTextColor="#054C08"
         app:tabIndicatorColor="@color/black"
         app:tabMode="scrollable"
-        android:background="#E6EC61">
+        android:background="#FD8A66">
 
 
     </com.google.android.material.tabs.TabLayout>
