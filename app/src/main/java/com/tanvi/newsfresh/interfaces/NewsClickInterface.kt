@@ -6,8 +6,8 @@ import com.tanvi.newsfresh.model.Article
 import com.tanvi.newsfresh.model.News
 
  interface NewsClickInterface {
-   // fun openNews(newsModel: Article)
-//      fun onCellClickListener(position:Int):ItemData
-//      fun searchViewonQuerryTextListener(text:String?)
+    fun openNews(newsModel: Article)
+      fun onCellClickListener(position:Int):ItemData
+    //  fun searchViewonQuerryTextListener(text:String?)
 
 }

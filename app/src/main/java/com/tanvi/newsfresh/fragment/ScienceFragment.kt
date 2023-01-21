@@ -106,7 +106,7 @@ class ScienceFragment : Fragment(),NewsClickInterface {
         })
     }
 
-    override fun openNews(newsModel: Article) {
+  override fun openNews(newsModel: Article) {
       val intent = Intent(context,SecondActivity::class.java)
         intent.putExtra("articleLink",newsModel.title)
         intent.putExtra("articleLive",newsModel.description)
@@ -121,9 +121,4 @@ class ScienceFragment : Fragment(),NewsClickInterface {
     }
 
 
-
-
-//    override fun openSomethingElse(DetailedItems: Fragment) {
-//        TODO("Not yet implemented")
-//    }
 }

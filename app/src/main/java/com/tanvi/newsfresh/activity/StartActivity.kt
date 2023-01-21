@@ -9,25 +9,10 @@ import android.widget.EditText
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
-import androidx.core.content.ContextCompat.startActivity
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelStore
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
-import androidx.viewpager2.widget.ViewPager2
 import com.tanvi.newsfresh.ItemData
-import com.tanvi.newsfresh.NewsViewHolder
 import com.tanvi.newsfresh.R
-import com.tanvi.newsfresh.adapter.Adapter
-import com.tanvi.newsfresh.adapter.ViewPagerAdapterTwo
-import com.tanvi.newsfresh.fragment.EntertainmentFragment
-import com.tanvi.newsfresh.fragment.HealthCareFragment
-import com.tanvi.newsfresh.fragment.ScienceFragment
-import com.tanvi.newsfresh.fragment.TechnologyFragment
-import com.tanvi.newsfresh.interfaces.NewsClickInterface
-import com.tanvi.newsfresh.model.Article
 import java.util.*
 
 class StartActivity:AppCompatActivity() {
@@ -58,7 +43,6 @@ class StartActivity:AppCompatActivity() {
         cardBoll = findViewById(R.id.cardBoll)
         viewpager = findViewById(R.id.viewPager)
         val images = listOf(R.drawable.iv21, R.drawable.iv27, R.drawable.iv5)
-        val adapterClass = ViewPagerAdapterTwo(images)
      //   viewpager.adapter = adapterClass
         iv1 = findViewById(R.id.iv1)
         iv2 = findViewById(R.id.iv2)

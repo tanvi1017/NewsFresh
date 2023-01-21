@@ -29,7 +29,7 @@ class TechnologyAdapter(var itemDataList: List<Article>,val newsClickListener:Ne
         holder.binding.tvHeadline.text=(model.description)
         val context = holder.itemView.getContext()
         holder.binding.technologyCardView.setOnClickListener {
-            //newsClickListener.openNews(model)
+            newsClickListener.openNews(model)
            // MainActivity.dataNew =itemDataList[position]
 //            val intent = Intent(context, SecondActivity::class.java)
 //            context.startActivity(intent)

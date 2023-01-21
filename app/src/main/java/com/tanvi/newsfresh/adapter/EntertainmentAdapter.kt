@@ -22,7 +22,7 @@ import com.tanvi.newsfresh.model.Article
          holder.binding.tvHeadline.text = (data.description)
         // val context = holder.itemView.getContext()
          holder.binding.cardView.setOnClickListener {
-           //  newClickListener.openNews(data)
+             newClickListener.openNews(data)
          }
      }
      override fun getItemCount(): Int {

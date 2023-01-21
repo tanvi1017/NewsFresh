@@ -43,4 +43,12 @@ class HomeActivity : AppCompatActivity(), NewsClickInterface {
         binding.rvMenu.adapter = adapter
     }
 
+    override fun openNews(newsModel: Article) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onCellClickListener(position: Int): ItemData {
+        TODO("Not yet implemented")
+    }
+
 }

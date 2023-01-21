@@ -1,36 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".activity.MainActivity">
-    <androidx.appcompat.widget.Toolbar
-        android:layout_width="match_parent"
-        android:id="@+id/toolbar"
-        android:background="#FA6B3E"
-        app:titleTextColor="@color/black"
-        android:layout_gravity="center_horizontal"
-        app:title="Daily News"
-        android:layout_height="?attr/actionBarSize"/>
-    <com.google.android.material.tabs.TabLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/tabLayout"
-        app:tabSelectedTextColor="@color/white"
-        app:tabTextColor="#054C08"
-        app:tabIndicatorColor="@color/black"
-        app:tabMode="scrollable"
-        android:background="#FD8A66">
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/mainFrame">
+    <include layout="@layout/app_bar"/>
+    <include layout="@layout/error_layout" />
 
-
-    </com.google.android.material.tabs.TabLayout>
-    <androidx.viewpager2.widget.ViewPager2
+    <androidx.viewpager.widget.ViewPager
         android:layout_width="match_parent"
-        android:id="@+id/viewPager"
-        android:layout_weight="1"
-        android:layout_height="0dp">
-    </androidx.viewpager2.widget.ViewPager2>
+        android:layout_height="match_parent"
+        android:id="@+id/viewPager">
+    </androidx.viewpager.widget.ViewPager>
 
-</LinearLayout>
+</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

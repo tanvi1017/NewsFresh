@@ -115,11 +115,6 @@ import retrofit2.Response
          TODO("Not yet implemented")
      }
 
-     override fun searchViewonQuerryTextListener(text: String?) {
-         TODO("Not yet implemented")
-     }
-
-
  }
 
 //getString(R.string.api_key)

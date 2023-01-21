@@ -5,24 +5,37 @@
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.151268115942029" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1665" />
+        <entry key="app/src/main/res/drawable/background_color.xml" value="0.1245" />
+        <entry key="app/src/main/res/drawable/background_round.xml" value="0.1245" />
         <entry key="app/src/main/res/drawable/custom_cardview.xml" value="0.1245" />
+        <entry key="app/src/main/res/drawable/ic_baseline_health_and_safety_24.xml" value="0.1245" />
+        <entry key="app/src/main/res/drawable/ic_baseline_insert_emoticon_24.xml" value="0.1245" />
+        <entry key="app/src/main/res/drawable/ic_baseline_trending_up_24.xml" value="0.1245" />
+        <entry key="app/src/main/res/drawable/ic_biotech_24.xml" value="0.1245" />
+        <entry key="app/src/main/res/drawable/ic_euro_24.xml" value="0.1245" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.168" />
+        <entry key="app/src/main/res/drawable/ic_science.xml" value="0.1245" />
         <entry key="app/src/main/res/drawable/ic_search_24.xml" value="0.1245" />
-        <entry key="app/src/main/res/drawable/shape_curve.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_detail.xml" value="0.22447916666666667" />
+        <entry key="app/src/main/res/drawable/ic_sport.xml" value="0.1245" />
+        <entry key="app/src/main/res/drawable/shape_curve.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_detail.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.22447916666666667" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.22239583333333332" />
         <entry key="app/src/main/res/layout/activity_search.xml" value="0.2234375" />
         <entry key="app/src/main/res/layout/activity_second.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_start.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_viewpager.xml" value="0.2234375" />
+        <entry key="app/src/main/res/layout/app_bar.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/content_main.xml" value="0.2234375" />
+        <entry key="app/src/main/res/layout/error_layout.xml" value="0.2" />
         <entry key="app/src/main/res/layout/fragment_entertainment.xml" value="0.23645833333333333" />
         <entry key="app/src/main/res/layout/fragment_health_care.xml" value="0.23645833333333333" />
         <entry key="app/src/main/res/layout/fragment_science.xml" value="0.23645833333333333" />
         <entry key="app/src/main/res/layout/fragment_sport.xml" value="0.23645833333333333" />
         <entry key="app/src/main/res/layout/fragment_technology.xml" value="0.23645833333333333" />
-        <entry key="app/src/main/res/layout/item_news.xml" value="0.23541666666666666" />
+        <entry key="app/src/main/res/layout/item_news.xml" value="0.2" />
         <entry key="app/src/main/res/layout/news_menu_row.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/news_row.xml" value="0.2234375" />
         <entry key="app/src/main/res/layout/rotate_clockwise.xml" value="0.2234375" />
         <entry key="app/src/main/res/layout/row.xml" value="0.2234375" />
         <entry key="app/src/main/res/layout/row_entertainment.xml" value="0.22487335205078124" />

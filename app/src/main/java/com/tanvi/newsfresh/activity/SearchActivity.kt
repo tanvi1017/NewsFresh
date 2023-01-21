@@ -10,7 +10,7 @@ import com.tanvi.newsfresh.R
 import com.tanvi.newsfresh.interfaces.NewsClickInterface
 import com.tanvi.newsfresh.model.Article
 
-class SearchActivity:AppCompatActivity(),NewsClickInterface {
+class SearchActivity:AppCompatActivity() {
     lateinit var search:SearchView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

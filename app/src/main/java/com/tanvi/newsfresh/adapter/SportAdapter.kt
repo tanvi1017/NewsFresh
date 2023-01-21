@@ -35,7 +35,7 @@ class SportAdapter (var itemDataList: List<Article>,val newsClickListener:NewsCl
          holder.binding.tvHeadline.text=(model.description)
          val context = holder.itemView.getContext()
          holder.binding.SportCardView.setOnClickListener {
-             //newsClickListener.openNews(model)
+             newsClickListener.openNews(model)
 
              //MainActivity.dataNew = itemDataList[position]
 //             val intent = Intent(context, SecondActivity::class.java)

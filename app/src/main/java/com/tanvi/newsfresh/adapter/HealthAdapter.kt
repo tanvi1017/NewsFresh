@@ -35,7 +35,7 @@ class HealthAdapter (var itemDataList: List<Article>, val newsClickListener: New
            // MainActivity.dataNew = itemDataList[position]
 //            val intent = Intent(context, SecondActivity::class.java)
 //            context.startActivity(intent)
-            //newsClickListener.openNews(model)
+            newsClickListener.openNews(model)
         }
     }
      override fun getItemCount(): Int {
