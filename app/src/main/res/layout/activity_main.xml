@@ -5,9 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:showIn=""
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    tools:showIn="@layout/app_bar_main">
+
+    <include layout="@layout/app_bar_main"/>
+    <include layout="@layout/error_layout" />
     <FrameLayout
+        android:id="@+id/mainFrame"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <androidx.viewpager.widget.ViewPager
