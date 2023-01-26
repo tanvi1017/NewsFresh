@@ -4,6 +4,7 @@ import android.app.SearchManager
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -53,8 +54,10 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
         searchView.queryHint = "Search News here..."
         searchView.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
-                if (query.length > 0) {
+                if (query.isNotEmpty()) {
                     //   hideLayout();
+                    Log.v("strText1",query)
+
                     LoadFragSearch(query)
                 }
                 return false

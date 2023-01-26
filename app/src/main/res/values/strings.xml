@@ -1,6 +1,17 @@
 <resources>
     <string name="app_name">NewsFresh</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="api_key">e5619d5d497b4572b7ef35f428cab308</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">NewsStar</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="action_search">Search</string>
+    <string name="title_activity_detail_news">ActivityDetailNews</string>
+    <string name="title_activity_detail">DetailActivity</string>
 </resources>

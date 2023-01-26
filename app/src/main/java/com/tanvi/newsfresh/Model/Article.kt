@@ -26,8 +26,8 @@ class Article{
     @SerializedName("url")
     @Expose
     var url:String?=null
-
-    @SerializedName("url To Image")
+//urlToImage
+    @SerializedName("urlToImage")
     @Expose
     var urlToImage: String?=null
  }

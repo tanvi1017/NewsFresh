@@ -17,7 +17,7 @@ import com.tanvi.newsfresh.Utils.DateFormat
 import com.tanvi.newsfresh.Utils.randomDrawbleColor
 import java.text.DateFormat
 
-class RvAdapter(var article: List<Article>,var context: Context):RecyclerView.Adapter<RvAdapter.MyViewHolder>() {
+ class RvAdapter(var article: List<Article>,var context: Context):RecyclerView.Adapter<RvAdapter.MyViewHolder>() {
     var manager: FragmentManager? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.news_row_layout, null)
@@ -37,17 +37,11 @@ class RvAdapter(var article: List<Article>,var context: Context):RecyclerView.Ad
         myViewHolder.date.text = datee
         myViewHolder.source.text = model.source!!.name
         myViewHolder.frame.setOnClickListener {
-            //                Toast.makeText(context, "clicked url is \n"+model.getUrl(), Toast.LENGTH_SHORT).show();
             val intent = Intent(context, DetailActivity::class.java)
             intent.putExtra("news detail", url)
             context.startActivity(intent)
-            //   manager.beginTransaction().replace(R.id.viewpager,new FragmentDetail()).commit();
         }
-        Glide.with(context)
-            .load(model.urlToImage)
-            .apply(requestOptions)
-            .transition(DrawableTransitionOptions.withCrossFade())
-            .into(myViewHolder.imageView)
+        Glide.with(context).load(model.urlToImage).into(myViewHolder.imageView)
             myViewHolder.share.setOnClickListener {
             val shareIntent = Intent(Intent.ACTION_SEND)
             shareIntent.type = "text/plain"
@@ -55,8 +49,7 @@ class RvAdapter(var article: List<Article>,var context: Context):RecyclerView.Ad
             shareIntent.putExtra(Intent.EXTRA_TEXT, url)
             context.startActivity(Intent.createChooser(shareIntent, "choose one"))
         }
-    }
-
+    }//baby dekh rhi ho na..han h...debug krna bata ra hu..ok
     override fun getItemCount(): Int {
         return article.size
     }
@@ -75,9 +68,8 @@ class RvAdapter(var article: List<Article>,var context: Context):RecyclerView.Ad
     }
     init {
         tle = itemView.findViewById(R.id.title)
-        // view.setOnClickListener(setOnItemClickListener());
         date = itemView.findViewById(R.id.date)
-        desc = itemView.findViewById(R.id.description)
+        desc = itemView.findViewById(R.id.descr)
         source = itemView.findViewById(R.id.tvSource)
         imageView = itemView.findViewById(R.id.iv)
         share = itemView.findViewById(R.id.btnShare)
