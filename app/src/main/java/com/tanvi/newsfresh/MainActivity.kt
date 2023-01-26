@@ -129,7 +129,7 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
         val manager = supportFragmentManager
         val transaction = manager.beginTransaction()
         hideLayout()
-        transaction.replace(R.id.mainFrame, frag, "Search Fragment").addToBackStack(null)
+        transaction.replace(R.id.mainFrame, frag, "FragmentSearchNews").addToBackStack(null)
         transaction.commit()
     }
     override fun onFragmentInteraction(uri: Uri?) {

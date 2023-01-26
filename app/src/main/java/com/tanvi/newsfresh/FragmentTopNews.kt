@@ -73,7 +73,6 @@ class FragmentTopNews : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this
         val view = inflater.inflate(R.layout.fragment_top_news, container, false)
         if (arguments != null) {
             newsKey = arguments?.getString(NEWS_KEY).toString();
@@ -103,21 +102,20 @@ class FragmentTopNews : Fragment() {
         checkNetwork()
         swipeRefreshLayout?.setOnRefreshListener(SwipeRefreshLayout.OnRefreshListener {
             checkNetwork()
-            loadJSON(pageSize)
+            loadJSON()
             swipeRefreshLayout?.setRefreshing(false)
         })
-        loadJSON(pageSize)
-        setRvListeners()
+        loadJSON()
         return view
     }
 
-    fun loadJSON( page:Int) {
+    fun loadJSON() {
         val apiInterface = ApiClient.apiClient.create(ApiInterface::class.java)
         val country = Utils.country
-        val pageSize = 10
+        val page = 10
 
         val call: Call<News> = if(isTopNews){
-            apiInterface.getTopNews("in", Constant.API_KEY ,pageSize)
+            apiInterface.getTopNews("in", Constant.API_KEY ,page)
         }else{
             apiInterface.getNews(newsKey,Constant.API_KEY,page)
         }
@@ -185,33 +183,7 @@ class FragmentTopNews : Fragment() {
         super.onDetach()
         mListener = null
     }
-    private fun setRvListeners() {
-        recyclerView?.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-                if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
-                    isScrolling = true
-                }
-            }
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-                visibleItemCount = recyclerView.layoutManager?.childCount ?:0
-                totalItemCount= recyclerView.layoutManager?.itemCount ?:0
-                pastVisibleItemCount=(recyclerView.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
-                Log.v("countValue","vCount - $visibleItemCount, totalItemCount $totalItemCount, pastvis count $pastVisibleItemCount")
-                if (isScrolling && visibleItemCount+pastVisibleItemCount==totalItemCount)
-                {
-                    isScrolling = false
-                progressBar.visibility= View.VISIBLE
-                    page++
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        loadJSON(pageSize)
-                    }, 2000)
-                }
-            }
 
-        })
-    }
 }
 
 
