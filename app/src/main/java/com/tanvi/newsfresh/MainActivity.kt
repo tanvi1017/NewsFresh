@@ -58,12 +58,10 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
                 if (query.isNotEmpty()) {
                     //   hideLayout();
                     Log.v("strText1",query)
-
                     LoadFragSearch(query)
                 }
                 return false
             }
-
             override fun onQueryTextChange(newText: String): Boolean {
                 // hideLayout();
                 //LoadFragSearch();
@@ -72,7 +70,6 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
         })
         return true
     }
-
     private fun setupViewPager(viewPager: ViewPager?) {
         val adapter = TabAdapter(supportFragmentManager)
         adapter.addFragment(FragmentTopNews.newInstance("",true), "Top")
@@ -93,7 +90,6 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
             true
         } else super.onOptionsItemSelected(item)
     }
-
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         val id = item.itemId
@@ -110,18 +106,15 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
 //        drawer.closeDrawer(GravityCompat.START);
         return true
     }
-
     override fun onClick(v: View) {}
     fun hideLayout() {
         tabs!!.visibility = View.GONE
         viewPager!!.visibility = View.GONE
     }
-
     fun showLayout() {
         tabs!!.visibility = View.VISIBLE
         viewPager!!.visibility = View.VISIBLE
     }
-
     fun LoadFragSearch(query: String?) {
         val bundle = Bundle()
         bundle.putString("query", query)
@@ -135,6 +128,4 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
     }
     override fun onFragmentInteraction(uri: Uri?) {
     }
-
-
 }

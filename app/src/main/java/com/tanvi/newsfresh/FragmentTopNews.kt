@@ -4,6 +4,7 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.Uri
 import android.os.Bundle
+import android.os.Parcelable
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -37,7 +38,7 @@ import retrofit2.Response
     var btnRetry: Button? = null
     lateinit var progressBar:ProgressBar
     private var mShimmerViewContainer: ShimmerFrameLayout? = null
-    private var articles: List<Article> = ArrayList()
+    private var articles: MutableList<Article> = ArrayList()
     var pageNumber =1
     var pageCount=10
     var isScrolling:Boolean=false
@@ -116,13 +117,16 @@ import retrofit2.Response
             apiInterface.getNews(newsKey,Constant.API_KEY,pageCount,pageNumber)
         }
 
+
         call.enqueue(object : Callback<News> {
             override fun onResponse(call: Call<News>, response: Response<News>) {
                 if (response.isSuccessful && response.body()!!.articles != null) {
-                    articles = response.body()!!.articles
+                  //  articles = response.body()!!.articles
+                    articles.addAll(response.body()!!.articles)
                     rvAdapter = activity?.let { RvAdapter(articles, it) }
                     rv!!.adapter = rvAdapter
-                    rvAdapter!!.notifyDataSetChanged()
+                    rvAdapter?.notifyDataSetChanged()
+                    layoutManager?.onRestoreInstanceState(recyclerViewState)
                     mShimmerViewContainer!!.stopShimmer()
                     mShimmerViewContainer!!.visibility = View.GONE
                 } else {
@@ -175,18 +179,19 @@ import retrofit2.Response
         super.onDetach()
         mListener = null
     }
+     var recyclerViewState: Parcelable?=null
     private fun setRvAdapter(){
         rv?.addOnScrollListener(object :RecyclerView.OnScrollListener(){
             //recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
                 override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                     super.onScrollStateChanged(recyclerView, newState)
+                recyclerViewState = layoutManager?.onSaveInstanceState(); // save recycleView state
+
                 //totalItemCount = News.totalResults
                 Log.v(
-                    "onscrollcalled", "1stcallled"
-                )
+                    "onscrollcalled", "1stcallled")
                     if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
-                        isScrolling = true
-                    }
+                        isScrolling = true }
                 }
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
