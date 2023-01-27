@@ -10,7 +10,9 @@ interface ApiInterface {
     fun getTopNews(
         @Query("country")country:String?,
         @Query("apiKey") apiKey:String?,
-        @Query("pageSize") pageCount:Int
+        @Query("pageSize") pageCount:Int,
+        @Query("page") pageNumber: Int
+
 
 
     ) :Call<News>
@@ -18,6 +20,7 @@ interface ApiInterface {
     fun getNews(
         @Query("q")q:String?,
         @Query("apiKey") apiKey: String?,
-        @Query("pageSize") pageCount: Int
+        @Query("pageSize") pageCount: Int,
+        @Query("page") pageNumber: Int
     ):Call<News>
 }

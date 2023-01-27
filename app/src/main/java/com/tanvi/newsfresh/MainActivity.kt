@@ -4,6 +4,7 @@ import android.app.SearchManager
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -19,7 +20,7 @@ import com.google.android.material.tabs.TabLayout
 
 class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelectedListener,
     FragmentTopNews.OnFragmentInteractionListener, View.OnClickListener,
-    FragmentSearchNews.OnFragmentInteractionListener {
+    FragmentSearchNews.OnFragmentInteractionListener{
     var layoutManager: RecyclerView.LayoutManager? = null
     var errorLayout: RelativeLayout? = null
     lateinit var tabs: TabLayout
@@ -134,5 +135,6 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
     }
     override fun onFragmentInteraction(uri: Uri?) {
     }
+
 
 }

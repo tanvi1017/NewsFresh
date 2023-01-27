@@ -1,19 +1,15 @@
 package com.tanvi.newsfresh
 
-import android.app.Activity
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.Uri
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,13 +23,13 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class FragmentTopNews : Fragment() {
+ class FragmentTopNews : Fragment() {
     var ty_error: TextView? = null
     var iv_error: ImageView? = null
     var recyclerViewTopNews: RecyclerView? = null
     var frameLayoutTopNews: FrameLayout? = null
     var mListener: OnFragmentInteractionListener? = null
-    var recyclerView: RecyclerView? = null
+    var rv: RecyclerView? = null
     var rvAdapter: RvAdapter? = null
     var swipeRefreshLayout: SwipeRefreshLayout? = null
     var layoutManager: RecyclerView.LayoutManager? = null
@@ -42,13 +38,13 @@ class FragmentTopNews : Fragment() {
     lateinit var progressBar:ProgressBar
     private var mShimmerViewContainer: ShimmerFrameLayout? = null
     private var articles: List<Article> = ArrayList()
-    var pageSize =1
-    var page =1
+    var pageNumber =1
+    var pageCount=10
     var isScrolling:Boolean=false
     var visibleItemCount :Int =0
     var pastVisibleItemCount:Int =0
     var totalItemCount:Int =0
-
+    //var totalItemCount:Int =0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,7 +74,6 @@ class FragmentTopNews : Fragment() {
             newsKey = arguments?.getString(NEWS_KEY).toString();
             isTopNews =arguments?.getBoolean(IS_TOP_NEWS)?:false
         }
-
         frameLayoutTopNews = view.findViewById(R.id.topNewsLayout)
         iv_error = view.findViewById(R.id.iv_error)
         progressBar =view.findViewById(R.id.progressBar)
@@ -88,45 +83,45 @@ class FragmentTopNews : Fragment() {
         mShimmerViewContainer = view.findViewById(R.id.shimmer_view_container)
         //  btnRetry=view.findViewById(R.id.btnRetry);
         errorLayout = view.findViewById(R.id.error_layout)
-        recyclerView = view.findViewById(R.id.recylerviewTopNews)
+        rv = view.findViewById(R.id.recylerviewTopNews)
         layoutManager = LinearLayoutManager(activity)
-        recyclerView?.setLayoutManager(layoutManager)
-        recyclerView?.setItemAnimator(DefaultItemAnimator())
+        rv?.setLayoutManager(layoutManager)
+        rv?.setItemAnimator(DefaultItemAnimator())
         // recyclerView.setAdapter(rvAdapter);
-        recyclerView?.setNestedScrollingEnabled(false)
-        ViewCompat.setNestedScrollingEnabled(recyclerView!!, false)
-        recyclerView?.setItemAnimator(DefaultItemAnimator())
+      //  rv?.setNestedScrollingEnabled(false)
+        ViewCompat.setNestedScrollingEnabled(rv!!, false)
+        rv?.setItemAnimator(DefaultItemAnimator())
         mShimmerViewContainer?.startShimmer()
         //  recyclerView.addItemDecoration(new MyDividerItemDecoration(this, LinearLayoutManager.VERTICAL, 16));
         //recyclerView);
         checkNetwork()
         swipeRefreshLayout?.setOnRefreshListener(SwipeRefreshLayout.OnRefreshListener {
             checkNetwork()
+            setRvAdapter()
             loadJSON()
             swipeRefreshLayout?.setRefreshing(false)
         })
+        setRvAdapter()
         loadJSON()
         return view
     }
 
     fun loadJSON() {
         val apiInterface = ApiClient.apiClient.create(ApiInterface::class.java)
-        val country = Utils.country
-        val page = 10
+
 
         val call: Call<News> = if(isTopNews){
-            apiInterface.getTopNews("in", Constant.API_KEY ,page)
+            apiInterface.getTopNews("in", Constant.API_KEY ,pageCount,pageNumber)
         }else{
-            apiInterface.getNews(newsKey,Constant.API_KEY,page)
+            apiInterface.getNews(newsKey,Constant.API_KEY,pageCount,pageNumber)
         }
 
-        //
         call.enqueue(object : Callback<News> {
             override fun onResponse(call: Call<News>, response: Response<News>) {
                 if (response.isSuccessful && response.body()!!.articles != null) {
                     articles = response.body()!!.articles
                     rvAdapter = activity?.let { RvAdapter(articles, it) }
-                    recyclerView!!.adapter = rvAdapter
+                    rv!!.adapter = rvAdapter
                     rvAdapter!!.notifyDataSetChanged()
                     mShimmerViewContainer!!.stopShimmer()
                     mShimmerViewContainer!!.visibility = View.GONE
@@ -148,12 +143,12 @@ class FragmentTopNews : Fragment() {
             iv_error!!.visibility = View.GONE
             errorLayout!!.visibility = View.GONE
             mShimmerViewContainer!!.visibility = View.VISIBLE
-            recyclerView!!.visibility = View.VISIBLE
+            rv!!.visibility = View.VISIBLE
             // loadJSON();
             //      Toast.makeText(this, "connecte4d", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(activity, "no conn", Toast.LENGTH_SHORT).show()
-            recyclerView!!.visibility = View.GONE
+            rv!!.visibility = View.GONE
             ty_error!!.visibility = View.VISIBLE
             iv_error!!.visibility = View.VISIBLE
             mShimmerViewContainer!!.visibility = View.GONE
@@ -163,8 +158,7 @@ class FragmentTopNews : Fragment() {
 
     val isNetworkAvailable: Boolean
         get() {
-            val connectivityManager =
-                activity?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            val connectivityManager = activity?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
             return connectivityManager.activeNetworkInfo != null && connectivityManager.activeNetworkInfo!!
                 .isConnected
         }
@@ -173,9 +167,7 @@ class FragmentTopNews : Fragment() {
         mListener = if (context is OnFragmentInteractionListener) {
             context
         } else {
-            throw RuntimeException(
-                context.toString()
-                        + " must implement OnFragmentInteractionListener"
+            throw RuntimeException(context.toString() + " must implement OnFragmentInteractionListener"
             )
         }
     }
@@ -183,7 +175,38 @@ class FragmentTopNews : Fragment() {
         super.onDetach()
         mListener = null
     }
-
+    private fun setRvAdapter(){
+        rv?.addOnScrollListener(object :RecyclerView.OnScrollListener(){
+            //recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                    super.onScrollStateChanged(recyclerView, newState)
+                //totalItemCount = News.totalResults
+                Log.v(
+                    "onscrollcalled", "1stcallled"
+                )
+                    if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
+                        isScrolling = true
+                    }
+                }
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                visibleItemCount = recyclerView.layoutManager?.childCount ?: 0//3
+                totalItemCount = recyclerView.layoutManager?.itemCount ?: 0   //10
+                Log.v(
+                    "onscrollcalled", "2nd callled"
+                )
+                pastVisibleItemCount = (recyclerView.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()//7
+                Log.v(
+                    "countValue", "vCount - $visibleItemCount, totalItemCount $totalItemCount, pastvis count $pastVisibleItemCount"
+                )
+                if (isScrolling && visibleItemCount + pastVisibleItemCount == totalItemCount) {
+                    isScrolling = false
+                    pageNumber++
+                    loadJSON()
+                }
+            }
+        })
+    }
 }
 
 

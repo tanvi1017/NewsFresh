@@ -27,7 +27,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class FragmentSearchNews : Fragment() {
+   class FragmentSearchNews : Fragment() {
     lateinit var progressBar:ProgressBar
     var ty_error: TextView? = null
     var iv_error: ImageView? = null
@@ -60,8 +60,6 @@ class FragmentSearchNews : Fragment() {
         layoutManager = LinearLayoutManager(activity)
         recyclerView?.setLayoutManager(layoutManager)
         recyclerView?.setItemAnimator(DefaultItemAnimator())
-        // recyclerView.setAdapter(rvAdapter);
-        //good..ab paginagtion laga do
         recyclerView?.setNestedScrollingEnabled(false)
         recyclerView?.setItemAnimator(DefaultItemAnimator())
         mShimmerViewContainer?.startShimmer()
@@ -80,7 +78,7 @@ class FragmentSearchNews : Fragment() {
         val apiInterface = apiClient.create(ApiInterface::class.java)
         val country = country
         val strtext = arguments?.getString("query")
-        val call:Call<News> =apiInterface.getNews(strtext,Constant.API_KEY,50)
+        val call:Call<News> =apiInterface.getNews(strtext,Constant.API_KEY,1,10)
         call.enqueue(object:Callback<News> {
             override fun onResponse(call: Call<News>, response: Response<News>) {
                 if (response.isSuccessful && response.body()!!.articles != null) {
@@ -124,10 +122,8 @@ class FragmentSearchNews : Fragment() {
     }
     val isNetworkAvailable: Boolean
         get() {
-            val connectivityManager =
-                activity?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-            return connectivityManager.activeNetworkInfo != null && connectivityManager.activeNetworkInfo!!
-                .isConnected
+            val connectivityManager = activity?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            return connectivityManager.activeNetworkInfo != null && connectivityManager.activeNetworkInfo!!.isConnected
         }
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -135,8 +131,7 @@ class FragmentSearchNews : Fragment() {
             context
         } else {
             throw RuntimeException(
-                context.toString()
-                        + " must implement OnFragmentInteractionListener")
+                context.toString() + " must implement OnFragmentInteractionListener")
         }
     }
     override fun onDetach() {

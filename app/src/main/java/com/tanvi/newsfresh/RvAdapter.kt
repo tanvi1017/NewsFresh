@@ -2,6 +2,8 @@ package com.tanvi.newsfresh
 
 import android.content.Context
 import android.content.Intent
+import android.speech.tts.TextToSpeech
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,8 +18,9 @@ import com.tanvi.newsfresh.Model.Article
 import com.tanvi.newsfresh.Utils.DateFormat
 import com.tanvi.newsfresh.Utils.randomDrawbleColor
 import java.text.DateFormat
+import java.util.*
 
- class RvAdapter(var article: List<Article>,var context: Context):RecyclerView.Adapter<RvAdapter.MyViewHolder>() {
+class RvAdapter(var article: List<Article>,var context: Context):RecyclerView.Adapter<RvAdapter.MyViewHolder>() {
     var manager: FragmentManager? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.news_row_layout, null)
@@ -31,6 +34,7 @@ import java.text.DateFormat
         requestOptions.diskCacheStrategy(DiskCacheStrategy.ALL)
         val model = article[position]
         val url = model.url
+        val text=model.title
         val datee = DateFormat(model.date)
         myViewHolder.tle.text = model.title
         myViewHolder.desc.text = model.description
@@ -38,7 +42,9 @@ import java.text.DateFormat
         myViewHolder.source.text = model.source!!.name
         myViewHolder.frame.setOnClickListener {
             val intent = Intent(context, DetailActivity::class.java)
+              Intent(context, TextConverter::class.java)
             intent.putExtra("news detail", url)
+            intent.putExtra("title",text)
             context.startActivity(intent)
         }
         Glide.with(context).load(model.urlToImage).into(myViewHolder.imageView)
@@ -49,11 +55,13 @@ import java.text.DateFormat
             shareIntent.putExtra(Intent.EXTRA_TEXT, url)
             context.startActivity(Intent.createChooser(shareIntent, "choose one"))
         }
-    }//baby dekh rhi ho na..han h...debug krna bata ra hu..ok
+
+    }
     override fun getItemCount(): Int {
         return article.size
     }
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private var tts: TextToSpeech? = null
         var tle: TextView
         var desc: TextView
         var date: TextView
@@ -62,6 +70,7 @@ import java.text.DateFormat
         var progressBar: ProgressBar? = null
         var frame: FrameLayout
         var share: ImageButton
+        var btnVolume :ImageButton
         lateinit var onItemClickListener: OnItemClickListener
     interface OnItemClickListener {
         fun onItemClick(v: View?, position: Int)
@@ -74,7 +83,7 @@ import java.text.DateFormat
         imageView = itemView.findViewById(R.id.iv)
         share = itemView.findViewById(R.id.btnShare)
         frame = itemView.findViewById(R.id.framee)
-        //onItemClickListener = onItemClickListener
+        btnVolume =itemView.findViewById(R.id.btnVolume)
     }
 }
 }
