@@ -41,14 +41,9 @@ import retrofit2.Response
        var layoutManager: RecyclerView.LayoutManager? = null
        var errorLayout: RelativeLayout? = null
        var btnRetry: Button? = null
-       var pageNumber = 1
-       var pageCount = 10
-       var isScrolling: Boolean = false
-       var visibleItemCount: Int = 0
-       var pastVisibleItemCount: Int = 0
-       var totalItemCount: Int = 0
+       var pageCount = 50
        private var mShimmerViewContainer: ShimmerFrameLayout? = null
-       private var articles: MutableList<Article> = ArrayList()
+       private var articles: List<Article> = ArrayList()
 
        override fun onCreateView(
            inflater: LayoutInflater, container: ViewGroup?,
@@ -80,19 +75,18 @@ import retrofit2.Response
            })
            loadJSON()
            return view
-           setRvAdapter()
        }
 
        fun loadJSON() {
            val apiInterface = apiClient.create(ApiInterface::class.java)
            val country = country
            val strtext = arguments?.getString("query")
-           val call: Call<News> = apiInterface.getNews(strtext, Constant.API_KEY, 1, 10)
+           val call: Call<News> = apiInterface.getNews(strtext, Constant.API_KEY, 50, 1)
            call.enqueue(object : Callback<News> {
                override fun onResponse(call: Call<News>, response: Response<News>) {
                    if (response.isSuccessful && response.body()!!.articles != null) {
-                       //articles = response.body()!!.articles
-                       articles.addAll(response.body()!!.articles)
+                       articles = response.body()!!.articles
+//                       articles.addAll(response.body()!!.articles)
                        rvAdapter = RvAdapter(articles, activity!!)
                        recyclerView!!.adapter = rvAdapter
                        rvAdapter!!.notifyDataSetChanged()
@@ -149,47 +143,8 @@ import retrofit2.Response
                )
            }
        }
-
        override fun onDetach() {
            super.onDetach()
            mListener = null
-       }
-       var recyclerViewState: Parcelable?=null
-       private fun setRvAdapter() {
-           recyclerView?.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-               override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                   super.onScrollStateChanged(recyclerView, newState)
-                   recyclerViewState =
-                       layoutManager?.onSaveInstanceState(); // save recycleView state
-
-                   //totalItemCount = News.totalResults
-                   Log.v(
-                       "onscrollcalled", "1stcallled"
-                   )
-                   if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
-                       isScrolling = true
-                   }
-               }
-
-               override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                   super.onScrolled(recyclerView, dx, dy)
-                   visibleItemCount = recyclerView.layoutManager?.childCount ?: 0//3
-                   totalItemCount = recyclerView.layoutManager?.itemCount ?: 0   //10
-                   Log.v(
-                       "onscrollcalled", "2nd callled"
-                   )
-                   pastVisibleItemCount =
-                       (recyclerView.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()//7
-                   Log.v(
-                       "countValue",
-                       "vCount - $visibleItemCount, totalItemCount $totalItemCount, pastvis count $pastVisibleItemCount"
-                   )
-                   if (isScrolling && visibleItemCount + pastVisibleItemCount == totalItemCount) {
-                       isScrolling = false
-                       pageNumber++
-                       loadJSON()
-                   }
-               }
-           })
        }
    }

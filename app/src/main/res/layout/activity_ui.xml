@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="@color/colorPrimary"
+        android:layout_height="120dp">
+
+        <TextView
+            android:id="@+id/uiHeading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="News Clips"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/uiHeading"
+            android:text="Lets Explore Your Self"
+            android:textColor="@color/white"
+            android:gravity="center_horizontal"
+            android:textStyle="italic"
+            android:textSize="20sp"
+            android:layout_marginTop="3dp"/>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/menuCardView"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+           android:background="#ffff"
+            app:cardCornerRadius="35dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginTop="15dp"
+            android:layout_alignParentEnd="true"
+           >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/menu_dark"
+                android:scaleType="fitXY"/>
+        </androidx.cardview.widget.CardView>
+
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/ovalImage"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:layout_marginTop="75dp"
+        android:src="@drawable/shape_curve" />
+    <androidx.cardview.widget.CardView
+        android:layout_marginTop="25dp"
+        android:id="@+id/uiCardView"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/ovalImage"
+        android:layout_marginRight="12dp"
+        android:layout_marginLeft="12dp"
+        app:cardCornerRadius="30dp"
+        android:elevation="5dp">
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/uiSearch"
+            app:queryHint="Find what you need"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewFrag"
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:layout_below="@id/uiCardView"
+        android:layout_marginTop="25dp" />
+
+    <TextView
+        android:id="@+id/uiText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/recyclerViewFrag"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
+        android:text="Stories Of Your Interest !!"
+        android:textColor="#F43939"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+    <androidx.cardview.widget.CardView
+        app:cardElevation="2dp"
+        android:layout_marginTop="20dp"
+        android:id="@+id/uiCardViewNews"
+        android:layout_width="match_parent"
+        android:layout_below="@id/uiText"
+        android:layout_height="290dp"
+        android:padding="10dp"
+        app:cardCornerRadius="45dp">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewUiNews"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>
