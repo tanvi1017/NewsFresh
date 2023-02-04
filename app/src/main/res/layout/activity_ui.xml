@@ -84,24 +84,17 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/recyclerViewFrag"
         android:layout_marginLeft="5dp"
-        android:layout_marginTop="10dp"
-        android:text="Stories Of Your Interest !!"
-        android:textColor="#F43939"
-        android:textSize="22sp"
-        android:textStyle="bold" />
-    <androidx.cardview.widget.CardView
-        app:cardElevation="2dp"
         android:layout_marginTop="20dp"
-        android:id="@+id/uiCardViewNews"
-        android:layout_width="match_parent"
-        android:layout_below="@id/uiText"
-        android:layout_height="290dp"
-        android:padding="10dp"
-        app:cardCornerRadius="45dp">
+        android:text="Trending !!"
+        android:textColor="#F43939"
+        android:textSize="25sp"
+        android:textStyle="bold" />
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewUiNews"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </androidx.cardview.widget.CardView>
+            android:layout_height="235dp"
+            android:layout_below="@id/uiText"
+            android:layout_marginTop="45dp"/>
+
 
 </RelativeLayout>

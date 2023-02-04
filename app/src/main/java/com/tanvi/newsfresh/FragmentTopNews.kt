@@ -109,21 +109,21 @@ import retrofit2.Response
 
     fun loadJSON() {
         val apiInterface = ApiClient.apiClient.create(ApiInterface::class.java)
-
-
         val call: Call<News> = if(isTopNews){
             apiInterface.getTopNews("in", Constant.API_KEY ,pageCount,pageNumber)
         }else{
             apiInterface.getNews(newsKey,Constant.API_KEY,pageCount,pageNumber)
         }
 
-
         call.enqueue(object : Callback<News> {
             override fun onResponse(call: Call<News>, response: Response<News>) {
-                if (response.isSuccessful && response.body()!!.articles != null) {
+
+                if (response.isSuccessful) {
                   //  articles = response.body()!!.articles
                     articles.addAll(response.body()!!.articles)
-                    rvAdapter = activity?.let { RvAdapter(articles, it) }
+                    rvAdapter = activity?.let {
+                        RvAdapter(articles, it)
+                    }
                     rv!!.adapter = rvAdapter
                     rvAdapter?.notifyDataSetChanged()
                     layoutManager?.onRestoreInstanceState(recyclerViewState)
@@ -133,7 +133,6 @@ import retrofit2.Response
                     Toast.makeText(activity, "No result", Toast.LENGTH_SHORT).show()
                 }
             }
-
             override fun onFailure(call: Call<News>, t: Throwable) {}
         })
     }

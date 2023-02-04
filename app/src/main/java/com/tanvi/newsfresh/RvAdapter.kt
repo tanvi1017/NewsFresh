@@ -52,7 +52,6 @@ class RvAdapter(var article: List<Article>,var context: Context):RecyclerView.Ad
             shareIntent.putExtra(Intent.EXTRA_SUBJECT, "My application name")
             shareIntent.putExtra(Intent.EXTRA_TEXT, url)
 
-
             context.startActivity(Intent.createChooser(shareIntent, "choose one"))
         }
 
@@ -61,7 +60,6 @@ class RvAdapter(var article: List<Article>,var context: Context):RecyclerView.Ad
         return article.size
     }
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private var tts: TextToSpeech? = null
         var tle: TextView
         var desc: TextView
         var date: TextView
