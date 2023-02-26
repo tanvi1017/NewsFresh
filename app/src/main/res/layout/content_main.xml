@@ -2,10 +2,12 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:showIn="@layout/app_bar"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    tools:context=".MainActivity"
+    tools:showIn="@layout/app_bar_main">
+    <include layout="@layout/error_layout" />
     <FrameLayout
         android:id="@+id/mainFrame"
         android:layout_width="match_parent"

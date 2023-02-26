@@ -1,20 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-   <item>
-       <shape android:shape="oval">
-           <solid android:color="#F88865">
-           </solid>
-       </shape>
-   </item>
-<!--    <item-->
-<!--        android:bottom="0dp"-->
-<!--        android:left="-100dp"-->
-<!--        android:right="-100dp"-->
-<!--        android:top="-80dp">-->
-<!--        <shape android:shape="oval">-->
-<!--         <solid android:color="#F68E8E">-->
-<!--         </solid>-->
-<!--        </shape>-->
-<!--    </item>-->
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="@color/colorPrimary"/>
+        </shape>
+    </item>
 
-</selector>
+    </selector>

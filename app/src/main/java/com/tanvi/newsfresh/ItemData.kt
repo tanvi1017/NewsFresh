@@ -1,8 +1,8 @@
 package com.tanvi.newsfresh
 
-import java.io.Serializable
+import android.icu.text.CaseMap
 
 data class ItemData (
      val Image:Int,
-     val text:String,
-     ):Serializable
+     val title:String
+         )
