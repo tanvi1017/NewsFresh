@@ -1,22 +1,22 @@
-package com.tanvi.newsfresh
+package com.tanvi.newsfresh.ui
 
 import android.app.SearchManager
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.RelativeLayout
-import android.widget.SearchView
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.tabs.TabLayout
+import com.tanvi.newsfresh.R
+import com.tanvi.newsfresh.TabAdapter
 
 class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelectedListener,
     FragmentTopNews.OnFragmentInteractionListener, View.OnClickListener,
@@ -72,7 +72,7 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
     }
     private fun setupViewPager(viewPager: ViewPager?) {
         val adapter = TabAdapter(supportFragmentManager)
-        adapter.addFragment(FragmentTopNews.newInstance("",true), "Top")
+        adapter.addFragment(FragmentTopNews.newInstance("", true), "Top")
         adapter.addFragment(FragmentTopNews.newInstance("Sports"), "Sports")
         adapter.addFragment(FragmentTopNews.newInstance("Technology"), "Technology")
         adapter.addFragment(FragmentTopNews.newInstance("Healthcare"), "Healthcare")

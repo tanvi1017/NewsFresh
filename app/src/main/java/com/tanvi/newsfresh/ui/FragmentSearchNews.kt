@@ -1,14 +1,9 @@
-package com.tanvi.newsfresh
+package com.tanvi.newsfresh.ui
 
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.Uri
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.os.Parcelable
-import android.provider.SyncStateContract
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -20,9 +15,12 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.tanvi.newsfresh.ApiClient.apiClient
-import com.tanvi.newsfresh.Constant.API_KEY
+import com.tanvi.newsfresh.ApiInterface
+import com.tanvi.newsfresh.Constant
 import com.tanvi.newsfresh.Model.Article
 import com.tanvi.newsfresh.Model.News
+import com.tanvi.newsfresh.R
+import com.tanvi.newsfresh.RvAdapter
 import com.tanvi.newsfresh.Utils.country
 import retrofit2.Call
 import retrofit2.Callback

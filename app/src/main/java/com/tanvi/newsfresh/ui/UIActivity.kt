@@ -1,15 +1,15 @@
-package com.tanvi.newsfresh
+package com.tanvi.newsfresh.ui
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.tanvi.newsfresh.*
 import com.tanvi.newsfresh.Model.Article
+import com.tanvi.newsfresh.Model.ItemData
 import com.tanvi.newsfresh.Model.News
 import retrofit2.Call
 import retrofit2.Callback
@@ -60,8 +60,8 @@ class UIActivity:AppCompatActivity() {
         listData1.add(data6)
     }
     private fun callApi(){
-        val apiInterface=ApiClient.apiClient.create(ApiInterface::class.java)
-        val call: Call<News> = apiInterface.getNews("trending",Constant.API_KEY,50,1)
+        val apiInterface= ApiClient.apiClient.create(ApiInterface::class.java)
+        val call: Call<News> = apiInterface.getNews("trending", Constant.API_KEY,50,1)
         call.enqueue(object:Callback<News>{
             override fun onResponse(call: Call<News>, response: Response<News>) {
                 if (response.isSuccessful)

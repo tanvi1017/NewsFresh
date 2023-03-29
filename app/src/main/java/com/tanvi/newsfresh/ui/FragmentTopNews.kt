@@ -1,4 +1,4 @@
-package com.tanvi.newsfresh
+package com.tanvi.newsfresh.ui
 
 import android.content.Context
 import android.net.ConnectivityManager
@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.facebook.shimmer.ShimmerFrameLayout
+import com.tanvi.newsfresh.*
 import com.tanvi.newsfresh.Model.Article
 import com.tanvi.newsfresh.Model.News
 import retrofit2.Call
@@ -110,9 +111,9 @@ import retrofit2.Response
     fun loadJSON() {
         val apiInterface = ApiClient.apiClient.create(ApiInterface::class.java)
         val call: Call<News> = if(isTopNews){
-            apiInterface.getTopNews("in", Constant.API_KEY ,pageCount,pageNumber)
+            apiInterface.getTopNews("in", Constant.API_KEY,pageCount,pageNumber)
         }else{
-            apiInterface.getNews(newsKey,Constant.API_KEY,pageCount,pageNumber)
+            apiInterface.getNews(newsKey, Constant.API_KEY,pageCount,pageNumber)
         }
 
         call.enqueue(object : Callback<News> {

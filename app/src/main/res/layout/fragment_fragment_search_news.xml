@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/searchNewsLayout"
-    tools:context=".FragmentTopNews">
+    tools:context=".ui.FragmentTopNews">
     <include layout="@layout/error_layout"/>
 
     <com.facebook.shimmer.ShimmerFrameLayout

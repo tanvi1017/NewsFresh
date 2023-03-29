@@ -2,7 +2,6 @@ package com.tanvi.newsfresh
 
 import android.content.Context
 import android.content.Intent
-import android.speech.tts.TextToSpeech
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +14,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.tanvi.newsfresh.Model.Article
 import com.tanvi.newsfresh.Utils.DateFormat
 import com.tanvi.newsfresh.Utils.randomDrawbleColor
+import com.tanvi.newsfresh.ui.DetailActivity
 
 class RvAdapter(var article: List<Article>,var context: Context):RecyclerView.Adapter<RvAdapter.MyViewHolder>() {
     var manager: FragmentManager? = null

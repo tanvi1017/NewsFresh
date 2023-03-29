@@ -1,18 +1,15 @@
-package com.tanvi.newsfresh
+package com.tanvi.newsfresh.ui
 
-import android.content.Intent
-import android.graphics.Bitmap
 import android.os.Bundle
-import android.view.MenuItem
 import android.view.View
-import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import com.tanvi.newsfresh.R
 
- class DetailActivity:AppCompatActivity() {
+class DetailActivity:AppCompatActivity() {
     lateinit var webView:WebView
     var progressBar:ProgressBar?=null
     var url:String?=null

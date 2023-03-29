@@ -1,4 +1,4 @@
-package com.tanvi.newsfresh
+package com.tanvi.newsfresh.ui
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,6 +6,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.tanvi.newsfresh.Model.ItemData
+import com.tanvi.newsfresh.R
 
 class MenuAdapter(private val mList:List<ItemData> ):RecyclerView.Adapter<MenuAdapter.ItemViewHolder>() {
     class ItemViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
