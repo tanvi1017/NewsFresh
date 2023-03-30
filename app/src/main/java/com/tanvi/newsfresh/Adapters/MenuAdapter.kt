@@ -1,4 +1,4 @@
-package com.tanvi.newsfresh.ui
+package com.tanvi.newsfresh.Adapters
 
 import android.view.LayoutInflater
 import android.view.View

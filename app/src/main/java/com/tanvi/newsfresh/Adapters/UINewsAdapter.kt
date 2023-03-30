@@ -1,4 +1,4 @@
-package com.tanvi.newsfresh
+package com.tanvi.newsfresh.Adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -9,7 +9,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.tanvi.newsfresh.Model.Article
-import kotlinx.coroutines.withContext
+import com.tanvi.newsfresh.R
+import com.tanvi.newsfresh.util.Utils
 
 class UINewsAdapter(private var article: List<Article>,var context: Context):RecyclerView.Adapter<UINewsAdapter.ItemViewHolder>() {
     class ItemViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {

@@ -1,4 +1,4 @@
-package com.tanvi.newsfresh
+package com.tanvi.newsfresh.Adapters
 
 import android.icu.text.CaseMap
 import androidx.fragment.app.Fragment

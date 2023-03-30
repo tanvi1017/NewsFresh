@@ -1,4 +1,4 @@
-package com.tanvi.newsfresh.ui
+package com.tanvi.newsfresh.Activity
 
 import android.os.Bundle
 import android.view.View
@@ -64,14 +64,5 @@ class DetailActivity:AppCompatActivity() {
     }
 
      // if you press Back button this code will work
-     override fun onBackPressed() {
-         // if your webview can go back it will go back
-         if (webView.canGoBack())
-             webView.goBack()
-         // if your webview cannot go back
-         // it will exit the application
-         else
-             super.onBackPressed()
 
-    }
 }

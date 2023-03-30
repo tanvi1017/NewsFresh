@@ -1,4 +1,4 @@
-package com.tanvi.newsfresh.ui
+package com.tanvi.newsfresh.Activity
 
 import android.app.SearchManager
 import android.net.Uri
@@ -16,11 +16,13 @@ import androidx.viewpager.widget.ViewPager
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.tabs.TabLayout
 import com.tanvi.newsfresh.R
-import com.tanvi.newsfresh.TabAdapter
+import com.tanvi.newsfresh.Adapters.TabAdapter
+import com.tanvi.newsfresh.Fragments.FragmentSearchNews
+import com.tanvi.newsfresh.Fragments.FragmentTopNews
 
 class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelectedListener,
     FragmentTopNews.OnFragmentInteractionListener, View.OnClickListener,
-    FragmentSearchNews.OnFragmentInteractionListener{
+    FragmentSearchNews.OnFragmentInteractionListener {
     var layoutManager: RecyclerView.LayoutManager? = null
     var errorLayout: RelativeLayout? = null
     lateinit var tabs: TabLayout
@@ -32,7 +34,7 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
         setSupportActionBar(toolbar)
         tabs = findViewById(R.id.tabs)
         // btnRetry = findViewById(R.id.btnRetry);
-        errorLayout = findViewById(R.id.error_layout)
+        errorLayout = findViewById(R.id.e_layout)
         viewPager = findViewById(R.id.viewpager)
         setupViewPager(viewPager)
         tabs.setupWithViewPager(viewPager)

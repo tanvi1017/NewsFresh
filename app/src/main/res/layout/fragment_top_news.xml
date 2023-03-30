@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/topNewsLayout"
-    tools:context=".ui.FragmentTopNews">
+    tools:context=".Fragments.FragmentTopNews">
     <com.facebook.shimmer.ShimmerFrameLayout
         android:id="@+id/shimmer_view_container"
         android:layout_width="wrap_content"
@@ -31,7 +31,9 @@
             android:layout_gravity="center_horizontal"/>
 
     </com.facebook.shimmer.ShimmerFrameLayout>
-    <include layout="@layout/error_layout"/>
+    <include
+        android:id="@+id/includeErrorLayout"
+        layout="@layout/error_layout"/>
 
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout

@@ -1,4 +1,4 @@
-package com.tanvi.newsfresh
+package com.tanvi.newsfresh.Adapters
 
 import android.content.Context
 import android.content.Intent
@@ -12,9 +12,11 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.tanvi.newsfresh.Model.Article
-import com.tanvi.newsfresh.Utils.DateFormat
-import com.tanvi.newsfresh.Utils.randomDrawbleColor
-import com.tanvi.newsfresh.ui.DetailActivity
+import com.tanvi.newsfresh.util.Utils.DateFormat
+import com.tanvi.newsfresh.util.Utils.randomDrawbleColor
+import com.tanvi.newsfresh.Activity.DetailActivity
+import com.tanvi.newsfresh.R
+import com.tanvi.newsfresh.util.TextConverter
 
 class RvAdapter(var article: List<Article>,var context: Context):RecyclerView.Adapter<RvAdapter.MyViewHolder>() {
     var manager: FragmentManager? = null

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="com.tanvi.newsfresh">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -18,10 +17,10 @@
         android:theme="@style/AppTheme"
         tools:targetApi="31">
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".Activity.MainActivity"
             android:exported="false" >
         </activity>
-        <activity android:name=".ui.UIActivity"
+        <activity android:name=".Activity.UIActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,12 +29,12 @@
         </activity>
 
         <activity
-            android:name=".ui.DetailActivity"
+            android:name=".Activity.DetailActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:exported="true" >
         </activity>
         <activity
-            android:name=".TextConverter"
+            android:name=".util.TextConverter"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:exported="true" >
         </activity>

@@ -1,4 +1,4 @@
-package com.tanvi.newsfresh
+package com.tanvi.newsfresh.util
 
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
@@ -6,6 +6,7 @@ import android.util.Log
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.tanvi.newsfresh.R
 import java.util.*
 
 class TextConverter:AppCompatActivity(),TextToSpeech.OnInitListener {
