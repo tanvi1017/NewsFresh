@@ -88,6 +88,7 @@ class FragmentTopNews : Fragment() {
             binding.swipeRefresh.isRefreshing = false
         }
         setRvAdapter()
+        viewModel.getNews("Top",newsKey,pageCount,pageNumber)
         return binding.root
     }
 

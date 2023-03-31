@@ -16,7 +16,6 @@ import com.tanvi.newsfresh.util.Utils.DateFormat
 import com.tanvi.newsfresh.util.Utils.randomDrawbleColor
 import com.tanvi.newsfresh.Activity.DetailActivity
 import com.tanvi.newsfresh.R
-import com.tanvi.newsfresh.util.TextConverter
 
 class RvAdapter(var article: List<Article>,var context: Context):RecyclerView.Adapter<RvAdapter.MyViewHolder>() {
     var manager: FragmentManager? = null
@@ -38,13 +37,7 @@ class RvAdapter(var article: List<Article>,var context: Context):RecyclerView.Ad
         myViewHolder.desc.text = model.description
         myViewHolder.date.text = datee
         myViewHolder.source.text = model.source!!.name
-        myViewHolder.frame.setOnClickListener {
-            val intent = Intent(context, DetailActivity::class.java)
-              Intent(context, TextConverter::class.java)
-            intent.putExtra("news detail", url)
-            intent.putExtra("title",text)
-            context.startActivity(intent)
-        }
+
         Glide.with(context).load(model.urlToImage).into(myViewHolder.imageView)
 
         myViewHolder.share.setOnClickListener {

@@ -16,7 +16,7 @@ import java.io.IOException
 
 class NewsViewModel(app: Application, private val appRepository: AppRepository):AndroidViewModel(app) {
     val newsData: MutableLiveData<Resources<NewsResponse>> = MutableLiveData()
-    private fun getNews(q: String, apiKey: String, pageCount: Int, pageNumber: Int) = viewModelScope.launch{
+     fun getNews(q: String, apiKey: String, pageCount: Int, pageNumber: Int) = viewModelScope.launch{
         fetchNews(q, apiKey, pageCount, pageNumber)
     }
      suspend fun fetchNews(q: String, apiKey: String, pageCount: Int, pageNumber: Int){

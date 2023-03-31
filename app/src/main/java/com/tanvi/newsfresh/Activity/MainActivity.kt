@@ -19,33 +19,31 @@ import com.tanvi.newsfresh.R
 import com.tanvi.newsfresh.Adapters.TabAdapter
 import com.tanvi.newsfresh.Fragments.FragmentSearchNews
 import com.tanvi.newsfresh.Fragments.FragmentTopNews
+import com.tanvi.newsfresh.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelectedListener,
     FragmentTopNews.OnFragmentInteractionListener, View.OnClickListener,
     FragmentSearchNews.OnFragmentInteractionListener {
     var layoutManager: RecyclerView.LayoutManager? = null
     var errorLayout: RelativeLayout? = null
-    lateinit var tabs: TabLayout
+   // lateinit var tabs: TabLayout
     var viewPager: ViewPager? = null
+    private lateinit var  binding:ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
-        setSupportActionBar(toolbar)
-        tabs = findViewById(R.id.tabs)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        setSupportActionBar(binding.mainAppbar.toolbar)
+
+       // val toolbar = findViewById<Toolbar>(R.id.toolbar)
+//        setSupportActionBar(binding.toolbar)
+       // tabs = findViewById(R.id.tabs)
         // btnRetry = findViewById(R.id.btnRetry);
-        errorLayout = findViewById(R.id.e_layout)
-        viewPager = findViewById(R.id.viewpager)
+       // errorLayout = findViewById(R.id.e_layout)
+       // viewPager = findViewById(R.id.viewpager)
         setupViewPager(viewPager)
-        tabs.setupWithViewPager(viewPager)
-        //        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-//                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-//        drawer.addDrawerListener(toggle);
-//        toggle.syncState();
-//
-//        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-//        navigationView.setNavigationItemSelectedListener(this);
+      //binding.tabs.setupWithViewPager(viewPager)
+        binding.mainAppbar.tabs.setupWithViewPager(viewPager)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -83,15 +81,7 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
         viewPager!!.adapter = adapter
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        val id = item.itemId
-        return if (id == R.id.action_settings) {
-            true
-        } else super.onOptionsItemSelected(item)
-    }
+
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         val id = item.itemId
@@ -109,13 +99,17 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
         return true
     }
     override fun onClick(v: View) {}
-    fun hideLayout() {
-        tabs!!.visibility = View.GONE
-        viewPager!!.visibility = View.GONE
+    private fun hideLayout() {
+     // binding.tabs.visibility = View.GONE
+      // viewPager!!.visibility = View.GONE
+        binding.mainAppbar.tabs.visibility = View.GONE
+        binding.viewPager.visibility =View.GONE
     }
     fun showLayout() {
-        tabs!!.visibility = View.VISIBLE
-        viewPager!!.visibility = View.VISIBLE
+      //binding.tabs.visibility = View.VISIBLE
+      // viewPager!!.visibility = View.VISIBLE
+        binding.mainAppbar.tabs.visibility =View.GONE
+        binding.viewPager.visibility =View.GONE
     }
     fun LoadFragSearch(query: String?) {
         val bundle = Bundle()

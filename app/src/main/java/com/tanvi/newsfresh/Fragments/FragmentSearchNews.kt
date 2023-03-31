@@ -10,6 +10,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,30 +19,41 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.tanvi.newsfresh.Adapters.RvAdapter
 import com.tanvi.newsfresh.Model.Article
+import com.tanvi.newsfresh.NewsResponse
+//import com.tanvi.newsfresh.NewsResponse.Companion.n1
 import com.tanvi.newsfresh.databinding.FragmentSearchNewsBinding
+import com.tanvi.newsfresh.service.AppRepository
+import com.tanvi.newsfresh.util.Resources
+import com.tanvi.newsfresh.util.ViewModelProviderFactory
+import com.tanvi.newsfresh.viewmodel.NewsViewModel
+
+
+
+
 
 class FragmentSearchNews : Fragment() {
+    lateinit var viewModel: NewsViewModel
     lateinit var binding: FragmentSearchNewsBinding
     var mListener: OnFragmentInteractionListener? = null
     var rvAdapter: RvAdapter? = null
     var layoutManager: RecyclerView.LayoutManager? = null
     var btnRetry: Button? = null
     var pageCount = 50
-    private var mShimmerViewContainer: ShimmerFrameLayout? = null
-    private var articles: List<Article> = ArrayList()
+   // private var mShimmerViewContainer: ShimmerFrameLayout? = null
+    private var articles: MutableList<Article> = mutableListOf()
 
     override fun onCreateView(
            inflater: LayoutInflater, container: ViewGroup?,
            savedInstanceState: Bundle?
        ): View? {
-        binding = FragmentSearchNewsBinding.inflate(inflater, container, false);
+        binding = FragmentSearchNewsBinding.inflate(layoutInflater)
 
-        layoutManager = LinearLayoutManager(activity)
+        layoutManager = LinearLayoutManager(requireActivity())
         binding.recylerviewTopNews.layoutManager = layoutManager
-        binding.recylerviewTopNews.itemAnimator = DefaultItemAnimator()
         binding.recylerviewTopNews.itemAnimator = DefaultItemAnimator()
         binding.shimmerViewContainer.startShimmer()
         checkNetwork()
+        setupViewModel()
         binding.swipeRefresh.setOnRefreshListener {
             checkNetwork()
             binding.swipeRefresh.isRefreshing = false
@@ -57,14 +70,14 @@ class FragmentSearchNews : Fragment() {
            if (isNetworkAvailable) {
                binding.eLayout.tvError.visibility = View.GONE
                binding.eLayout.ivError.visibility = View.GONE
-               mShimmerViewContainer?.visibility = View.VISIBLE
+             binding.shimmerViewContainer .visibility = View.VISIBLE
                binding.recylerviewTopNews.visibility = View.VISIBLE
            } else {
                Toast.makeText(activity, "no connection", Toast.LENGTH_SHORT).show()
              binding.swipeRefresh.visibility = View.GONE
                binding.eLayout.tvError.visibility = View.VISIBLE
                binding.eLayout.ivError.visibility = View.VISIBLE
-               mShimmerViewContainer?.visibility = View.GONE
+              binding.shimmerViewContainer.visibility = View.GONE
            }
        }
 
@@ -89,4 +102,44 @@ class FragmentSearchNews : Fragment() {
            super.onDetach()
            mListener = null
        }
+    private fun setupViewModel(){
+        val repository = AppRepository()
+        val factory = ViewModelProviderFactory(requireActivity().application, repository)
+        viewModel = ViewModelProvider(this, factory)[NewsViewModel::class.java]
+        getNews()
+    }
+    private fun getNews(){
+  viewModel.newsData.observe(viewLifecycleOwner, Observer {response->
+    when(response){
+        is Resources.Success ->{
+            response.data?.let {
+             articles.addAll(it)
+            }
+            //  articles = response.body()!!.articles
+            rvAdapter = activity?.let { RvAdapter(articles, it) }
+          //  rv!!.adapter = rvAdapter
+            binding.recylerviewTopNews.adapter=rvAdapter
+            rvAdapter = activity?.let { RvAdapter(articles, it) }
+            binding.recylerviewTopNews.adapter = rvAdapter
+            rvAdapter?.notifyDataSetChanged()
+            binding.shimmerViewContainer.stopShimmer()
+            binding.shimmerViewContainer.visibility = View.GONE
+
+        }
+        is Resources.Error ->{
+            Toast.makeText(activity, "No result", Toast.LENGTH_SHORT).show()
+            binding.shimmerViewContainer.visibility = View.GONE
+        }
+        is Resources.Loading->{
+            binding.shimmerViewContainer.showShimmer(true)
+         binding.shimmerViewContainer.visibility = View.VISIBLE
+
+        }
+    }
+}
+
+)
+    }
+
    }
+

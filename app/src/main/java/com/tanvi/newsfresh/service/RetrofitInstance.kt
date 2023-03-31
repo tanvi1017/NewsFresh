@@ -9,7 +9,7 @@ class RetrofitInstance {
             Retrofit.Builder().baseUrl(BASE_URL) .addConverterFactory(GsonConverterFactory.create())
                 .build()
         }
-        val newsApi by lazy {
+        val newsApi: ApiInterface by lazy {
             retrofitCall.create(ApiInterface::class.java)
         }
 
