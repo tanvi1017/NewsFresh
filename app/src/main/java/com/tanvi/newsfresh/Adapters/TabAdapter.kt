@@ -6,7 +6,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 
 class TabAdapter(fm:FragmentManager?):FragmentPagerAdapter(fm!!) {
-   private val mFragment:MutableList<Fragment> = ArrayList()
+  private val mFragment:MutableList<Fragment> = ArrayList()
     private val TitleList:MutableList<String> =ArrayList()
 
     override fun getCount(): Int {

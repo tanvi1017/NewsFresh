@@ -15,11 +15,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.facebook.shimmer.ShimmerFrameLayout
 import com.tanvi.newsfresh.Adapters.RvAdapter
 import com.tanvi.newsfresh.Model.Article
-import com.tanvi.newsfresh.NewsResponse
 //import com.tanvi.newsfresh.NewsResponse.Companion.n1
 import com.tanvi.newsfresh.databinding.FragmentSearchNewsBinding
 import com.tanvi.newsfresh.service.AppRepository
@@ -109,36 +106,29 @@ class FragmentSearchNews : Fragment() {
         getNews()
     }
     private fun getNews(){
-  viewModel.newsData.observe(viewLifecycleOwner, Observer {response->
-    when(response){
-        is Resources.Success ->{
-            response.data?.let {
-             articles.addAll(it)
-            }
-            //  articles = response.body()!!.articles
-            rvAdapter = activity?.let { RvAdapter(articles, it) }
-          //  rv!!.adapter = rvAdapter
-            binding.recylerviewTopNews.adapter=rvAdapter
-            rvAdapter = activity?.let { RvAdapter(articles, it) }
-            binding.recylerviewTopNews.adapter = rvAdapter
-            rvAdapter?.notifyDataSetChanged()
-            binding.shimmerViewContainer.stopShimmer()
-            binding.shimmerViewContainer.visibility = View.GONE
+  viewModel.newsData.observe(viewLifecycleOwner) { response ->
+      when (response) {
+          is Resources.Success -> {
+              response.data?.let {
+                  articles.addAll(it.articles)
+              }
+              rvAdapter =  RvAdapter(articles, requireContext())
+              binding.recylerviewTopNews.adapter = rvAdapter
+              rvAdapter?.notifyDataSetChanged()
+              binding.shimmerViewContainer.visibility = View.GONE
 
-        }
-        is Resources.Error ->{
-            Toast.makeText(activity, "No result", Toast.LENGTH_SHORT).show()
-            binding.shimmerViewContainer.visibility = View.GONE
-        }
-        is Resources.Loading->{
-            binding.shimmerViewContainer.showShimmer(true)
-         binding.shimmerViewContainer.visibility = View.VISIBLE
+          }
+          is Resources.Error -> {
+              Toast.makeText(activity, "No result", Toast.LENGTH_SHORT).show()
+              binding.shimmerViewContainer.visibility = View.GONE
+          }
+          is Resources.Loading -> {
+              binding.shimmerViewContainer.showShimmer(true)
+              binding.shimmerViewContainer.visibility = View.VISIBLE
 
-        }
-    }
-}
-
-)
+          }
+      }
+  }
     }
 
    }

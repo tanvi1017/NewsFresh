@@ -1,5 +1,6 @@
 package com.tanvi.newsfresh.util
 
+import android.app.Application
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -66,7 +67,7 @@ object Utils {
             return country.toLowerCase()
         }
 
-    fun hasInternetConnection(application: MyApplication): Boolean {
+    fun hasInternetConnection(application: Application): Boolean {
         val connectivityManager = application.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             val activeNetwork = connectivityManager.activeNetwork ?: return false
