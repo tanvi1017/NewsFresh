@@ -1,8 +1,7 @@
-package com.tanvi.newsfresh
+package com.tanvi.newsfresh.Adapters
 
 import android.content.Context
 import android.content.Intent
-import android.speech.tts.TextToSpeech
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,8 +12,10 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.tanvi.newsfresh.Model.Article
-import com.tanvi.newsfresh.Utils.DateFormat
-import com.tanvi.newsfresh.Utils.randomDrawbleColor
+import com.tanvi.newsfresh.util.Utils.DateFormat
+import com.tanvi.newsfresh.util.Utils.randomDrawbleColor
+import com.tanvi.newsfresh.Activity.DetailActivity
+import com.tanvi.newsfresh.R
 
 class RvAdapter(var article: List<Article>,var context: Context):RecyclerView.Adapter<RvAdapter.MyViewHolder>() {
     var manager: FragmentManager? = null
@@ -36,13 +37,7 @@ class RvAdapter(var article: List<Article>,var context: Context):RecyclerView.Ad
         myViewHolder.desc.text = model.description
         myViewHolder.date.text = datee
         myViewHolder.source.text = model.source!!.name
-        myViewHolder.frame.setOnClickListener {
-            val intent = Intent(context, DetailActivity::class.java)
-              Intent(context, TextConverter::class.java)
-            intent.putExtra("news detail", url)
-            intent.putExtra("title",text)
-            context.startActivity(intent)
-        }
+
         Glide.with(context).load(model.urlToImage).into(myViewHolder.imageView)
 
         myViewHolder.share.setOnClickListener {

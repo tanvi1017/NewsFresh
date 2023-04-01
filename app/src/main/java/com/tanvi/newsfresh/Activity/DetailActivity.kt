@@ -1,18 +1,15 @@
-package com.tanvi.newsfresh
+package com.tanvi.newsfresh.Activity
 
-import android.content.Intent
-import android.graphics.Bitmap
 import android.os.Bundle
-import android.view.MenuItem
 import android.view.View
-import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import com.tanvi.newsfresh.R
 
- class DetailActivity:AppCompatActivity() {
+class DetailActivity:AppCompatActivity() {
     lateinit var webView:WebView
     var progressBar:ProgressBar?=null
     var url:String?=null
@@ -67,14 +64,5 @@ import androidx.appcompat.widget.Toolbar
     }
 
      // if you press Back button this code will work
-     override fun onBackPressed() {
-         // if your webview can go back it will go back
-         if (webView.canGoBack())
-             webView.goBack()
-         // if your webview cannot go back
-         // it will exit the application
-         else
-             super.onBackPressed()
 
-    }
 }

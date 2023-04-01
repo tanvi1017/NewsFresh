@@ -19,8 +19,8 @@ class Article{
     @SerializedName("publishedAt")
     @Expose
     var date:String?=null
-
   @SerializedName("title")
+
   @Expose
   var title:String?=null
     @SerializedName("url")

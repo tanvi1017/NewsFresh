@@ -1,4 +1,4 @@
-package com.tanvi.newsfresh
+package com.tanvi.newsfresh.Adapters
 
 import android.icu.text.CaseMap
 import androidx.fragment.app.Fragment
@@ -6,7 +6,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 
 class TabAdapter(fm:FragmentManager?):FragmentPagerAdapter(fm!!) {
-   private val mFragment:MutableList<Fragment> = ArrayList()
+  private val mFragment:MutableList<Fragment> = ArrayList()
     private val TitleList:MutableList<String> =ArrayList()
 
     override fun getCount(): Int {

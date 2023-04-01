@@ -1,4 +1,4 @@
-package com.tanvi.newsfresh
+package com.tanvi.newsfresh.Model
 
 import android.icu.text.CaseMap
 

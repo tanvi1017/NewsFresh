@@ -10,9 +10,5 @@
         app:showAsAction="always"
         android:icon="@drawable/ic_search_24"
         app:actionViewClass="androidx.appcompat.widget.SearchView" />
-    <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="101"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
+
 </menu>
